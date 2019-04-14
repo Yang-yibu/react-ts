@@ -4,16 +4,18 @@
 
 ```
 先把webpack的开发环境
-x1.自动刷新
-2.跨域
-x3.cssnext编译 拆分独立css
-4.将jsx打包成独立的js
-5.拆分独立的react环境库
-6.引入react-router redux
+x 1.自动刷新
+x 2.跨域
+x 3.cssnext编译 拆分独立css
+x 4.将 jsx 打包成独立的 js
+x 5.拆分独立的 react 环境库
+6.引入 react-router redux
 
-上线环境：“
-1.压缩打包合并MD5
+上线环境：
+1.压缩打包合并 MD5
 2.优化项目 这里搞起来
+
+前端组件库用Ant Design
 ```
 
 ## 环境搭建
@@ -31,12 +33,46 @@ $ webpack-dev-server --devtool eval --progress --colors --hot --content-base bui
 ## 参考资料
 
 [ GitBook: React Webpack ](https://fakefish.github.io/react-webpack-cookbook/index.html)
+> react-webpack-cookbook 3 4 年前
 
 [ 博客：从零配置Webpack4.0搭建一个React工程 ](https://laclys.github.io/2018/04/09/从零配置Webpack4.0搭建一个React工程/)
 
 [React+Webpack快速上手指南](https://www.jianshu.com/p/418e48e0cef1)
 
 [babel 中文网](https://www.babeljs.cn/docs/)
+
+[ koa2-connect-history-api-fallback ](https://www.npmjs.com/package/koa2-connect-history-api-fallback)
+> koa2的一个中间件，用于处理 vue-router使用 history 模式返回 index.html，让koa2支持SPA应用程序
+
+
+[webpack4 生产环境 自己压缩](https://webpack.docschina.org/guides/production/#minification-%E5%8E%8B%E7%BC%A9-)
+
+[webpack4之 splitChunksPlugin 拆拆拆--项目实践](https://juejin.im/post/5c00916f5188254caf186f80)
+
+[vue-cli 解析](https://juejin.im/post/5b2872516fb9a00e8626e34f)
+
+[webpack 基础概念](https://github.com/chemdemo/chemdemo.github.io/issues/13)
+## 待解决问题
+
+```bash
+# webpack development 有时候不会生成 dist 文件，但是服务启动后，可以访问
+
+# webpack-dev-server 不会输出文件到 dist
+# DevServer 会把 Webpack 构建出的文件保存在内存中，在要访问输出的文件时，必须通过 HTTP 服务访问
+```
+
+```js
+// 拆分 React 独立文件的时候
+// 在 html-webpack-plugin 中配置 页面中不插入任何脚本
+new HTMLWebpackPlugin({
+  title: 'CMS DEV',
+  filename: 'index.html',
+  template: path.resolve(__dirname, 'src/web/views/common/layout.html'),
+  chunks: ['vendors', 'commons', 'index'],
+})
+```
+
+
 ## 错误日志
 
 ```bat
