@@ -5,7 +5,7 @@ export default class Navigation extends React.Component {
   render() {
     return (
       <div className="navigation">
-        <div className="container">  我是 Nav a</div>
+        <div className="container">我是 Nav { this.props.name }</div>
       </div>
     );
   }

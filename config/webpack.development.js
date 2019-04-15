@@ -8,8 +8,8 @@ module.exports = {
     port: '8080',
     host: 'localhost',
     proxy: {
-      '/api': 'http://127.0.0.1:8020',
-      '/graphql': 'http://127.0.0.1:8020'
+      '/api': 'http://localhost:3000',
+      '/test': 'http://localhost:3000',
     },
     contentBase: path.join(__dirname, '../dist'),
     hot: true,

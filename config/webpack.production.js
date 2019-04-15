@@ -1,11 +1,10 @@
 'use strict'
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清除 目录
-// const minify = require('html-minifier').minify;
+// const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清除 目录
 
 console.log('********* 生产环境 **********');
 
@@ -15,7 +14,7 @@ module.exports = {
     filename: "scripts/[name].[contenthash:5].bundle.js"
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new OptimizeCSSAssetsPlugin({}),
     new MiniCssExtractPlugin({
       filename: 'styles/[name].[contenthash:5].css',

@@ -100,3 +100,14 @@ Error: Cannot find module '@babel/core'
 # React cli 中
 # "babel-core": "7.0.0-bridge.0"
 ```
+
+```bash
+# 报错
+$ npm run server:dev
+```
+
+```bash
+$ npm run build
+# webpack.output.publicPath 没有设置 静态资源报错  dist/static
+net::ERR_ABORTED 404 (Not Found)
+```

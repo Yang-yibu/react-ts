@@ -2,8 +2,7 @@ const path = require('path');
 const argv = require('yargs-parser')(process.argv.slice(2));
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清除 目录
-
+// const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清除 目录
 
 const _mode = argv.mode || 'development';
 console.log('_mode: \n', _mode);
@@ -29,7 +28,8 @@ for (let item of files) {
 let webpackConfig = {
   entry: _entry,
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist/static'),
+    publicPath: "/",
     filename: 'scripts/[name].bundle.js'
   },
   optimization: {
@@ -81,10 +81,10 @@ let webpackConfig = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       title: 'CMS DEV',
-      filename: 'index.html',
+      filename: '../views/index.html',
       template: path.resolve(__dirname, 'src/web/views/common/layout.html'),
       // chunks: ['vendors', 'commons', 'index'],
     })
