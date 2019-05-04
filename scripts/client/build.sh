@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-webpack --mode development;
+webpack --progress --mode development;
+

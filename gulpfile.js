@@ -7,22 +7,25 @@ const watch = require('gulp-watch'); // 检测文件变化
 const rollup = require('gulp-rollup'); // 流清晰
 const replace = require('rollup-plugin-replace');
 // const eslint = require('gulp-eslint');
+const tslint = require('gulp-tslint');
 
 let entry = './src/server/**/*.ts';
 
 
 function buildDev() {
-  return watch(entry, {
+  return gulp.watch(entry, {
     ignoreInitial: false
-  }, function () {
-    tsProject.src()
-      .pipe(tsProject(entry))
-      .pipe(babel({
-        babelrc: false, // 使项目中的 babelrc 文件不生效
-        plugins: ["transform-es2015-modules-commonjs"] // 把 Module 转化为 require
-      }))
-      .pipe(gulp.dest('dist'))
-  })
+  },
+    function () {
+      tsProject.src()
+        .pipe(tsProject(entry))
+        .pipe(babel({
+          babelrc: false, // 使项目中的 babelrc 文件不生效
+          plugins: ["transform-es2015-modules-commonjs"] // 把 Module 转化为 require
+        }))
+        .pipe(gulp.dest('dist'))
+    }
+  )
 }
 
 // 上线环境
@@ -38,12 +41,13 @@ function buildProd() {
 }
 
 // 代码检查
-// function buildLint() {
-//   return gulp.src(entry)
-//     .pipe(eslint())
-//     .pipe(eslint.format())
-//     .pipe(eslint.failAfterError())
-// }
+function buildTsLint() {
+  return gulp.src(entry)
+    .pipe(tslint({
+      formatter: "stylish"
+    }))
+    .pipe(tslint.report())
+}
 
 // 清洗环境
 function buildConfig() {
@@ -71,7 +75,7 @@ if (process.env.NODE_ENV === 'production') {
   build = gulp.series(buildProd, buildConfig);
 }
 if (process.env.NODE_ENV === 'lint') {
-  build = gulp.series(buildLint);
+  build = gulp.series(buildTsLint);
 }
 
 gulp.task('default', build);

@@ -18,6 +18,13 @@ x 5.拆分独立的 react 环境库
 前端组件库用Ant Design
 ```
 
+## 优化
+
+### optimize-css-assets-webpack-plugin
+
+？
+
+
 ## 环境搭建
 
 ```bash
@@ -110,4 +117,39 @@ $ npm run server:dev
 $ npm run build
 # webpack.output.publicPath 没有设置 静态资源报错  dist/static
 net::ERR_ABORTED 404 (Not Found)
+```
+
+```bat
+# 安装 gulp-tslint 的时候，没有安装 tslint
+
+$ cnpm install --save-dev gulp-tslint
+\ [0/1] Installing gulp-tslint@*[npminstall:get] retry GET http://registry.npm.taobao.org/gulp-tslint/download/gulp-tslint-8.1.4.tgz after 100ms, retry left 4, error: ResponseError: socket hang up (req "error"), GET https://cdn.npm.taobao.org/gulp-tslint/-/gulp-tslint-8.1.4.tgz -1 (connected: true, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":1,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+√ Installed 1 packages
+√ Linked 6 latest versions
+√ Run 0 scripts
+peerDependencies WARNING gulp-tslint@* requires a peer of tslint@>=5.0.0-dev but none was installed
+√ All packages installed (4 packages installed from npm registry, used 43s, speed 602.58B/s, json 7(11.32kB), tarball 14.14kB)
+```
+
+```bat
+:: 没有配置 tslint 的规则
+
+Tried to lint D:\yaning\learnCode\yideng_project\underLine\own\src\server\app.ts but found no valid, enabled rules for this file type and file path in the resolved configuration.
+
+:: 修改 
+添加 tslint.json ; 
+{
+  "extends": [],
+  "rules": {
+    // 禁止使用 var 当时用了 var 会报错
+    "no-var-keyword": true
+  }
+}
+```
+
+```
+无法使用 JSX，除非提供了 "--jsx" 标志。ts(17004)
+
+在 tsconfig.json 中添加 "jsx": "react"
 ```

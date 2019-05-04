@@ -1,5 +1,21 @@
 {
-  "presets": ["@babel/preset-react"],
+  "presets": [
+    [
+      "@babel/preset-env",
+    ],
+    "@babel/preset-react",
+    ["@babel/preset-typescript"]
+  ],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        // "style": true
+        "style": "css"
+      }
+    ]
+  ],
   "env": {
     "development": {
       "presets": [["@babel/preset-react", { "development": true }]]

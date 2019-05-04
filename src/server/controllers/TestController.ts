@@ -7,12 +7,12 @@ import { controller, interfaces, Router, inject, httpGet, TAGS, provideThrowable
 @controller('/test') // 控制器
 @provideThrowable(TYPE.Controller, "TestController")
 export default class TestController implements interfaces.Controller {
-  @httpGet('/page') // Action
+  @httpGet('/pages') // Action
   private async index(ctx: Router.IRouterContext, next: () => Promise<any>): Promise<any> {
     // ctx.body = await ctx.render('index');
     ctx.body = {
       code: 200,
-      msg: '请求成功',
+      msg: '请求成功哈',
       data: '标题'
     }
   }

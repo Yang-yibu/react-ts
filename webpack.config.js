@@ -2,6 +2,12 @@ const path = require('path');
 const argv = require('yargs-parser')(process.argv.slice(2));
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// const FriendlyErrorsWebpack = require('friendly-errors-webpack-plugin');
+const Dashboard = require('webpack-dashboard');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const dashboard = new Dashboard();
+
 // const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清除 目录
 
 const _mode = argv.mode || 'development';
@@ -44,6 +50,12 @@ let webpackConfig = {
           chunks: 'all',
           priority: 100,
         },
+        'vendorAnt': {
+          test: /ant/,
+          name: 'vendors-antD',
+          chunks: 'all',
+          priority: 95
+        },
         'nodeVendors': {  // 异步加载公共包、组件等
           test: /node_modules/,
           chunks: 'all',
@@ -59,10 +71,13 @@ let webpackConfig = {
       }
     }
   },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.json'],
+  },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         use: 'babel-loader',
         include: [
           path.join(__dirname, './src')
@@ -81,13 +96,16 @@ let webpackConfig = {
     ]
   },
   plugins: [
+
     // new CleanWebpackPlugin(),
-    new HTMLWebpackPlugin({
-      title: 'CMS DEV',
-      filename: '../views/index.html',
-      template: path.resolve(__dirname, 'src/web/views/common/layout.html'),
-      // chunks: ['vendors', 'commons', 'index'],
-    })
+    // new HTMLWebpackPlugin({
+    //   title: 'CMS DEV',
+    //   filename: '../views/index.html',
+    //   template: path.resolve(__dirname, 'src/web/views/common/layout.html'),
+    //   // chunks: ['vendors', 'commons', 'index'],
+    // }),
+    // new FriendlyErrorsWebpack(),
+     new DashboardPlugin(dashboard.setData)
   ]
 }
 

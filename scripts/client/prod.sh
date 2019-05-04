@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-webpack --mode production;
+webpack --progress --mode production;
