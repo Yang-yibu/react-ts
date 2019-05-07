@@ -1,5 +1,6 @@
 {
   "extends": [],
+  "defaultSeverity": "warning",
   "rules": {
     "no-var-keyword": true,
     "class-name": true

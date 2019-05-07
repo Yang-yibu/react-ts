@@ -59,6 +59,10 @@ $ webpack-dev-server --devtool eval --progress --colors --hot --content-base bui
 [vue-cli 解析](https://juejin.im/post/5b2872516fb9a00e8626e34f)
 
 [webpack 基础概念](https://github.com/chemdemo/chemdemo.github.io/issues/13)
+
+[TypeScript: 官网推荐 React 项目](https://github.com/Microsoft/TypeScript-React-Starter)
+- TypeScript
+
 ## 待解决问题
 
 ```bash

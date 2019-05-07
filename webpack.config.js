@@ -4,14 +4,14 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // const FriendlyErrorsWebpack = require('friendly-errors-webpack-plugin');
-const Dashboard = require('webpack-dashboard');
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const dashboard = new Dashboard();
+// const Dashboard = require('webpack-dashboard');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
+// const dashboard = new Dashboard();
 
 // const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清除 目录
 
 const _mode = argv.mode || 'development';
-console.log('_mode: \n', _mode);
+console.log('_mode: ', _mode);
 
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const merge = require('webpack-merge');
@@ -23,7 +23,8 @@ let _entry = {};
 for (let item of files) {
   // console.log('item: ', item);
   // 使用 path 模块解析路径，再截掉 .entry.js
-  console.log('item: \n', path.parse(item));
+  console.log('items: ');
+  console.table(path.parse(item));
 
   if (/.+\/([a-zA-Z]+-[a-zA-Z]+)(\.entry\.js)$/g.test(item) == true) {
     const entryKey = RegExp.$1;
@@ -91,7 +92,17 @@ let webpackConfig = {
           },
           'css-loader',
           'postcss-loader'
-        ]
+        ],
+        exclude: [path.join(__dirname, './src/web/views/common')],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader'
+        ],
+        include: [path.join(__dirname, './src/web/views/common')]
       }
     ]
   },
@@ -104,8 +115,8 @@ let webpackConfig = {
     //   template: path.resolve(__dirname, 'src/web/views/common/layout.html'),
     //   // chunks: ['vendors', 'commons', 'index'],
     // }),
-    // new FriendlyErrorsWebpack(),
-     new DashboardPlugin(dashboard.setData)
+    // new FriendlyErrorsWebpack()
+    //  new DashboardPlugin(dashboard.setData)
   ]
 }
 
